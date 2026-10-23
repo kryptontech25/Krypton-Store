@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Haz tu hogar más práctico con un tomacorriente inteligente. Consulta disponibilidad y pide por WhatsApp.">
+  <meta name="theme-color" content="#101311">
+  <title>CryptonStore | Tomacorriente inteligente</title>
+  <style>
+    :root {
+      --bg: #f5f3ee; --ink: #141414; --muted: #68645d; --green: #171717;
+      --green2: #9a7435; --lime: #d8b66a; --white: #fff; --line: #e4dfd5;
+      --radius: 22px; --shadow: 0 18px 50px rgba(15,30,22,.10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .topbar { background: var(--ink); color: #f7f8f3; text-align: center; padding: 10px 14px; font-size: 12px; letter-spacing: .08em; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding: 22px 0; }
+    .brand { font-weight: 900; letter-spacing: .16em; font-size: 18px; }
+    .brand span { color: var(--green2); }
+    .nav { display:flex; gap:24px; color:var(--muted); font-size:13px; }
+    .pill { border:1px solid var(--line); padding:11px 16px; border-radius:999px; font-size:13px; font-weight:700; }
+    .hero { display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center; padding: 40px 0 78px; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; background:#eee5d3; color:var(--green); border-radius:999px; padding:8px 12px; font-size:11px; letter-spacing:.11em; font-weight:800; text-transform:uppercase; }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--green2); }
+    h1 { font-size: clamp(40px, 5.2vw, 66px); line-height:.99; letter-spacing:-.055em; margin:22px 0 20px; max-width:580px; }
+    h1 em { font-style:normal; color:var(--green2); }
+    .lead { font-size:17px; line-height:1.7; color:var(--muted); max-width:500px; }
+    .price-row { display:flex; align-items:baseline; gap:12px; margin:25px 0 6px; }
+    .price { font-size:34px; font-weight:850; letter-spacing:-.04em; }
+    .price-note { font-size:12px; color:var(--muted); }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
+    .btn { border:0; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:999px; padding:16px 22px; font-size:14px; font-weight:800; transition:transform .18s, background .18s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:white; background:var(--green); }
+    .btn-primary:hover { background:var(--green2); }
+    .btn-secondary { border:1px solid #d6dcd3; background:transparent; }
+    .fine { color:var(--muted); font-size:11px; margin-top:13px; line-height:1.6; }
+    .visual { min-height:480px; background:#e5e9df; border-radius:32px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); }
+    .visual:before { content:""; position:absolute; width:340px; height:340px; border-radius:50%; background:#e8ddc4; top:45px; right:-55px; }
+    .visual:after { content:""; position:absolute; width:270px; height:270px; border-radius:50%; border:1px solid rgba(23,76,59,.16); bottom:-110px; left:-55px; }
+    .product { position:relative; z-index:2; width:230px; height:320px; background:linear-gradient(135deg,#fff 0%,#f9faf7 45%,#dce1db 100%); border:1px solid #d0d7cf; border-radius:27px; box-shadow:20px 25px 45px rgba(35,52,41,.20), inset -8px -2px 15px rgba(30,50,35,.06); transform:rotate(-7deg); padding:25px 20px; }
+    .product-top { display:flex; justify-content:space-between; align-items:center; color:#7a847b; font-size:9px; letter-spacing:.16em; font-weight:800; }
+    .status { width:7px;height:7px;background:#5bba81;border-radius:50%;box-shadow:0 0 10px #5bba81; }
+    .socket { width:80px;height:91px;border:2px solid #c5ccc4;border-radius:20px;margin:29px auto 0; position:relative; background:linear-gradient(145deg,#f7f8f5,#e7ebe5); box-shadow:inset 0 3px 6px rgba(0,0,0,.04); }
+    .socket:before,.socket:after { content:""; position:absolute; top:25px; width:7px;height:17px;background:#8d968e;border-radius:6px; }
+    .socket:before { left:24px; } .socket:after { right:24px; }
+    .ground { position:absolute; bottom:20px; left:32px; width:16px;height:7px;border-radius:5px;background:#8d968e; }
+    .usb-row { display:flex; justify-content:center; gap:10px; margin-top:17px; }
+    .usb { width:28px;height:9px;border-radius:5px;border:1px solid #b9c1b9;background:#e9ece7; }
+    .product-label { text-align:center; margin-top:17px; color:#8a938b; font-size:8px; letter-spacing:.22em; font-weight:800; }
+    .float-card { position:absolute; z-index:3; background:rgba(255,255,255,.88); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.8); border-radius:16px; padding:14px 16px; box-shadow:0 12px 30px rgba(30,50,35,.10); }
+    .float-card strong { display:block; font-size:13px; } .float-card small { color:var(--muted); font-size:10px; }
+    .float-one { left:20px; top:42px; } .float-two { right:18px; bottom:36px; }
+    .float-icon { display:inline-grid; place-items:center; width:28px;height:28px;border-radius:9px;background:#eee5d3;color:var(--green);margin-right:7px;font-weight:900; }
+    .trust { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:0 0 72px; }
+    .trust-item { display:flex; align-items:center; gap:12px; border-top:1px solid var(--line); padding:19px 5px; }
+    .trust-icon { width:38px;height:38px;border-radius:12px;background:#eee5d3;display:grid;place-items:center;color:var(--green);font-weight:900;flex-shrink:0; }
+    .trust-item strong { display:block;font-size:13px; } .trust-item small { display:block;color:var(--muted);font-size:11px;margin-top:4px; }
+    section { padding:68px 0; }
+    .section-head { max-width:600px; margin-bottom:30px; }
+    .kicker { color:var(--green2);font-size:11px;letter-spacing:.14em;font-weight:900;text-transform:uppercase; }
+    h2 { font-size:clamp(30px,4vw,44px); letter-spacing:-.045em; line-height:1.05; margin:12px 0; }
+    .section-copy { color:var(--muted); line-height:1.7; }
+    .features { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+    .feature { background:white;border:1px solid var(--line);border-radius:var(--radius);padding:25px;min-height:190px; }
+    .feature-num { font-size:12px;color:var(--green2);font-weight:900;letter-spacing:.1em; }
+    .feature h3 { font-size:18px;margin:22px 0 8px;letter-spacing:-.025em; }
+    .feature p { color:var(--muted);font-size:13px;line-height:1.65;margin:0; }
+    .band { background:var(--green);color:white;border-radius:30px;padding:42px;display:flex;align-items:center;justify-content:space-between;gap:25px; }
+    .band h2 { max-width:570px;margin:0; }
+    .band p { color:#d2e0d7;line-height:1.6;max-width:550px;font-size:14px; }
+    .band .btn { background:var(--lime);color:var(--ink);white-space:nowrap; }
+    .steps { display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
+    .step { padding:22px 0;border-top:1px solid var(--line); }
+    .step b { color:var(--green2);font-size:12px;letter-spacing:.1em; }
+    .step h3 { font-size:17px;margin:13px 0 8px; }
+    .step p { color:var(--muted);font-size:13px;line-height:1.65; }
+    .faq { max-width:780px; }
+    details { border-bottom:1px solid var(--line);padding:19px 0; }
+    summary { cursor:pointer;font-weight:750;font-size:14px; }
+    details p { color:var(--muted);font-size:13px;line-height:1.7;max-width:700px; }
+    footer { background:#101311;color:white;padding:35px 0 95px;margin-top:55px; }
+    .foot-row { display:flex;justify-content:space-between;gap:20px;align-items:flex-start; }
+    footer p { color:#aab3ac;font-size:11px;line-height:1.7;max-width:520px; }
+    .whatsapp-float { position:fixed;z-index:10;right:18px;bottom:18px;box-shadow:0 12px 28px rgba(0,0,0,.2); }
+    .notice { background:#fff4d5;color:#6a4b00;padding:12px 16px;font-size:12px;line-height:1.55;text-align:center; }
+    @media(max-width:760px) {
+      .wrap{width:min(100% - 28px,560px)} .nav{display:none} header{padding:17px 0}
+      .hero{grid-template-columns:1fr;gap:26px;padding:25px 0 48px}
+      h1{font-size:46px}.lead{font-size:15px}.visual{min-height:390px}.product{transform:scale(.88) rotate(-7deg)}
+      .trust{grid-template-columns:1fr;gap:0;padding-bottom:40px}.trust-item{padding:14px 0}
+      section{padding:48px 0}.features,.steps{grid-template-columns:1fr}.feature{min-height:unset}
+      .band{padding:28px;align-items:flex-start;flex-direction:column}.band .btn{white-space:normal}
+      .foot-row{flex-direction:column}.price{font-size:31px}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">TECNOLOGÍA PRÁCTICA PARA TU DÍA A DÍA</div>
+  <header class="wrap">
+    <a class="brand" href="#" aria-label="CryptonStore inicio">CRYPTONSTORE<span>.</span></a>
+    <nav class="nav"><a href="#beneficios">Beneficios</a><a href="#como-funciona">Cómo funciona</a><a href="#preguntas">Preguntas frecuentes</a></nav>
+    <a class="pill" href="#comprar">Comprar ahora ↗</a>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Tu hogar, más inteligente</div>
+        <h1>Más control.<br><em>Menos complicaciones.</em></h1>
+        <p class="lead">Dale un toque inteligente a tus espacios con un tomacorriente diseñado para hacer más práctico el uso de tus dispositivos.</p>
+        <div class="price-row"><div class="price" id="price">$79.900 COP</div><div class="price-note">Precio de lanzamiento sugerido*</div></div>
+        <div class="actions" id="comprar">
+          <a class="btn btn-primary wa-link" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <span>↗</span></a>
+          <a class="btn btn-secondary" href="#beneficios">Ver beneficios</a>
+        </div>
+        <p class="fine">Consulta disponibilidad, cobertura y costo de envío antes de confirmar tu pedido. *Precio provisional: verifica el costo real en Dropi y tu margen antes de publicar.</p>
+      </div>
+      <div class="visual" role="img" aria-label="Ilustración conceptual de un tomacorriente inteligente blanco">
+        <div class="float-card float-one"><span class="float-icon">⌁</span><strong>Conectividad inteligente</strong><small>Consulta las funciones exactas</small></div>
+        <div class="product">
+          <div class="product-top"><span>SMART HOME</span><span class="status"></span></div>
+          <div class="socket"><div class="ground"></div></div>
+          <div class="usb-row"><div class="usb"></div><div class="usb"></div></div>
+          <div class="product-label">SMART POWER</div>
+        </div>
+        <div class="float-card float-two"><strong>Un espacio más práctico</strong><small>Diseñado para el uso diario</small></div>
+      </div>
+    </div>
+
+    <div class="wrap trust">
+      <div class="trust-item"><div class="trust-icon">✓</div><div><strong>Pedido asistido</strong><small>Resuelve dudas antes de comprar</small></div></div>
+      <div class="trust-item"><div class="trust-icon">↗</div><div><strong>Compra sencilla</strong><small>Atención directa por WhatsApp</small></div></div>
+      <div class="trust-item"><div class="trust-icon">⌂</div><div><strong>Para tu hogar</strong><small>Una mejora práctica para tus espacios</small></div></div>
+    </div>
+
+    <section id="beneficios">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Diseñado para simplificar</div>
+          <h2>Pequeños cambios.<br>Más comodidad en casa.</h2>
+          <p class="section-copy">Una propuesta sencilla para quienes quieren explorar soluciones de hogar inteligente sin complicar su rutina.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><div class="feature-num">01 / CONTROL</div><h3>Más control de tus dispositivos</h3><p>Si el modelo de Dropi incluye control por aplicación, podrás gestionar las funciones compatibles desde tu celular tras configurarlo.</p></article>
+          <article class="feature"><div class="feature-num">02 / RUTINA</div><h3>Una rutina más práctica</h3><p>Los modelos compatibles pueden permitir horarios o automatizaciones. Confirma esta función en la ficha técnica del proveedor.</p></article>
+          <article class="feature"><div class="feature-num">03 / INTEGRACIÓN</div><h3>Conecta tu ecosistema</h3><p>La compatibilidad con Wi-Fi, Alexa o Google depende de la versión exacta. Verifica la información del producto antes de ofrecerla.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap band">
+        <div><h2>Empieza a hacer tu hogar más práctico.</h2><p>Escríbenos para confirmar precio, existencias, características y cobertura de entrega antes de comprar.</p></div>
+        <a class="btn wa-link" href="#" target="_blank" rel="noopener">Consultar por WhatsApp ↗</a>
+      </div>
+    </section>
+
+    <section id="como-funciona">
+      <div class="wrap">
+        <div class="section-head"><div class="kicker">Compra en tres pasos</div><h2>Claro, simple y directo.</h2></div>
+        <div class="steps">
+          <div class="step"><b>PASO 01</b><h3>Consulta disponibilidad</h3><p>Confirma por WhatsApp si el producto está disponible y cuál es el precio final.</p></div>
+          <div class="step"><b>PASO 02</b><h3>Confirma los detalles</h3><p>Verifica dirección, cobertura, tiempos estimados, costo de envío y forma de pago.</p></div>
+          <div class="step"><b>PASO 03</b><h3>Procesa el pedido</h3><p>El vendedor registra el pedido con el proveedor y te comparte la información de seguimiento disponible.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="preguntas">
+      <div class="wrap faq">
+        <div class="section-head"><div class="kicker">Antes de comprar</div><h2>Preguntas frecuentes</h2></div>
+        <details><summary>¿Funciona con Alexa o Google Assistant?</summary><p>Depende de la referencia exacta. Confirma en la ficha técnica de Dropi cuáles asistentes y aplicaciones son compatibles.</p></details>
+        <details><summary>¿Cuál es el tiempo de entrega?</summary><p>El tiempo depende de la disponibilidad, la ciudad de destino y la operación logística del proveedor. Confírmalo antes de pagar.</p></details>
+        <details><summary>¿Cuánto cuesta el envío?</summary><p>El valor del envío puede variar según el destino y las condiciones del proveedor. Solicita el precio total antes de confirmar el pedido.</p></details>
+        <details><summary>¿Qué debo revisar antes de instalarlo?</summary><p>Revisa el voltaje, la corriente máxima, el tipo de toma, la carga admitida y las instrucciones del fabricante. No excedas la capacidad indicada y, si requiere intervención eléctrica fija, acude a un técnico calificado.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-row">
+      <div><div class="brand">CRYPTONSTORE<span style="color:#d5f36a">.</span></div><p>Tecnología y soluciones inteligentes para el día a día.</p></div>
+      <div><p>Atención al cliente: <a class="wa-text" href="#">configurar WhatsApp</a><br>Precios, características y disponibilidad sujetos a confirmación.</p><p>Antes de vender, completa la información legal y comercial de tu negocio, incluyendo políticas de tratamiento de datos, envíos, retracto, garantías y devoluciones aplicables en Colombia.</p></div>
+    </div>
+  </footer>
+  <a class="btn btn-primary whatsapp-float wa-link" href="#" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">WhatsApp ↗</a>
+
+  <div class="notice" id="setupNotice">Plantilla de CryptonStore: configura tu WhatsApp, confirma las características reales y ajusta el precio antes de publicarla.</div>
+
+  <script>
+    // CONFIGURACIÓN RÁPIDA: reemplaza estos valores antes de publicar.
+    const CONFIG = {
+      whatsapp: "573001234567", // Cambia por tu número real con indicativo de país, sin + ni espacios.
+      price: "$79.900 COP",      // Precio provisional: reemplázalo tras calcular costos y margen.
+      productName: "Tomacorriente inteligente"
+    };
+
+    document.getElementById("price").textContent = CONFIG.price;
+    const message = encodeURIComponent(
+      "Hola, quiero información sobre el " + CONFIG.productName +
+      ". ¿Me confirman precio final, disponibilidad, características y costo de envío?"
+    );
+    document.querySelectorAll(".wa-link").forEach(a => {
+      a.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + message;
+    });
+    document.querySelectorAll(".wa-text").forEach(a => {
+      a.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + message;
+    });
+  </script>
+</body>
+</html>
